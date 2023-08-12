@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokedex Kanto</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Sweet alert -->
 </head>
 <body>
-    <h1>Pokedex</h1>
-    <h2>Region kanto</h2>
-    <p>aqui podras buscar cualquier pokemon de la region kanto, tambien podras añadir uno que hayas descubierto</p>
+    <header>
+        <div class="nav-titles">
+            <img src="./assets/Img/Poke-title.png" alt="Imagen 3d">
+            <h2 class="main-title">Region kanto</h2>
+            <p>aqui podras buscar cualquier pokemon de la region kanto, tambien podras añadir uno que hayas descubierto</p>
+        </div>
 
-    <button id="btn-name">buscar nombre </button>
+        <div class="botones-nav">
+            <button id="btn-name">buscar nombre </button>
 
-    <button id="btn-num">buscar numero</button>
+            <button id="btn-num">buscar numero</button>
 
-    <button id="btn-tipo">buscar Tipo</button>
+            <button id="btn-tipo">buscar Tipo</button>
 
-    <button id="btn-add">crear nuevo Pokémon</button>
+            <button id="btn-add">crear nuevo Pokémon</button>
+        </div>
+    </header>
 
+    <main> <!-- Aqui van las cards con los datos de cada Pokemon -->
 
+    </main>
     <script src="./main.js"></script>
 </body>
 </html>

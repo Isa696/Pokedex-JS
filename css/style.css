@@ -1,0 +1,85 @@
+Copy code
+/* CSS Reset */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: middle;
+}
+
+/* Corrige el comportamiento de los elementos inline-block */
+/* Agregar más elementos aquí según sea necesario */
+/* Por ejemplo, algunos navegadores necesitan más correcciones */
+/* como input, button, etc. */
+
+/* Establece el espaciado de línea a 1 para evitar problemas de espacio entre elementos inline-block */
+/* Puedes ajustar esto según tus necesidades de diseño */
+body {
+  line-height: 1;
+  background-color: azure;
+}
+
+/* Elimina la decoración de los enlaces */
+a {
+  text-decoration: none;
+}
+
+/* Evita que las imágenes se comporten como elementos inline */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Import font pokemon */
+
+@font-face {
+    font-family: 'Pokemon solid';
+    src: url(../assets/font/Pokemon\ Solid.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+/* Estilos titulos */
+
+.main-title {
+    font-family: 'Pokemon solid';
+    color: #ffcc03;
+    font-size: 2rem;
+    padding: .5em;
+    letter-spacing: .1em;
+    background-color: rgba(14, 85, 217, 0.906);
+    border-radius: 15px;
+}
+
+.nav-titles, p{
+    text-align: center;
+    margin: .25em;
+    padding: .25em;
+}
+
+/*contenedor Titulos nav */
+
+.nav-titles{
+    background-color: rgba(0, 255, 255, 0.356);
+    width: 98vw;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    padding: .5em;
+}
+
+/* contenedor botones */
+
+.botones-nav{
+    width: 98vw;
+    height: fit-content;
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: space-around;
+}

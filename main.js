@@ -183,43 +183,106 @@ let lista = [
 //funciones buscar por nombre
 
 function buscarPokemon(){
-    let palabraClave = prompt("¿Que Pokemon desea buscar?").toLowerCase()
-    let resultado = lista.filter ( (pokemon) => pokemon.nombre.toLowerCase().includes(palabraClave))
-    if (resultado.length > 0){
-        console.table(resultado)
-        return
-    }else{
-        alert("no se encontro ninguna coincidencia con: " + palabraClave)
-    return}
-}
+    Swal.fire({
+        title: 'Ingresa el nombre que deseas buscar',
+        icon: "question",
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Buscar',
+        showLoaderOnConfirm: true,
+
+        preConfirm: (palabraClave) => {
+            palabraClave = palabraClave.toLowerCase().trim()
+            let resultado = lista.filter ((pokemon) => pokemon.nombre.toLowerCase().includes(palabraClave))
+                if (resultado.length > 0){
+                    console.table(resultado)
+
+                    Swal.fire({
+                        title: 'Resultados de búsqueda',
+                        html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
+                        resultado.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+                        confirmButtonText: 'OK'
+                        })
+                    return
+                    }else{
+                        Swal.fire({
+                        title: 'No se encontraron coincidencias con: ' + palabraClave,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                        })
+                    }
+                }
+    }
+)}
 
 //funcion buscar numero
 
 function buscarNumero(){
-    let numBuscado = parseInt(prompt("Que pokemon quieres buscar, segun su numero pokedex?"))
-    if(isNaN(numBuscado)){
-        alert("por favor ingresa un número válido")
-        return
-    }
-    let resultado = lista.filter ( (pokemon) => pokemon.numero === numBuscado)
-    if(resultado.length > 0){
-        console.table(resultado);
-    }else{
-    alert("no se encontro ninguna coincidencia con: " + numBuscado)
-}}
+        Swal.fire({
+        title: 'Que pokemon quieres buscar, segun su numero pokedex?',
+        icon: "question",
+        input: 'number',
+        showCancelButton: true,
+        confirmButtonText: 'Buscar',
+        showLoaderOnConfirm: true,
+
+            preConfirm: (numBuscado) => {
+                numBuscado = parseInt(numBuscado)
+                let resultado = lista.filter ( (pokemon) => pokemon.numero === numBuscado)
+                if(resultado.length > 0){
+                console.table(resultado);
+
+                    Swal.fire({
+                        title: 'Resultados de búsqueda',
+                        html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
+                        resultado.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+                        confirmButtonText: 'OK'
+                        })
+                }else{
+                Swal.fire({
+                    title: "no se encontro ninguna coincidencia con: " + numBuscado,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                    })
+                }
+            }
+        })
+}
 
 //funcion buscar por tipo
 
 function buscarTipo(){
-    let palabraClave = prompt("¿Que Pokemon desea buscar segun su tipo?").toLowerCase()
-    let resultado = lista.filter ( (pokemon) => pokemon.tipo.toLowerCase().includes(palabraClave))
-    if (resultado.length > 0){
-        console.table(resultado)
-        return
-    }else{
-        alert("no se encontro ninguna coincidencia con: " + palabraClave)
-    return}
-}
+    Swal.fire({
+        title: 'Ingresa el tipo de pokemon que deseas buscar',
+        icon: "question",
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Buscar',
+        showLoaderOnConfirm: true,
+
+        preConfirm: (palabraClave) => {
+            palabraClave = palabraClave.toLowerCase().trim()
+            let resultado = lista.filter ((pokemon) => pokemon.tipo.toLowerCase().includes(palabraClave))
+                if (resultado.length > 0){
+                    console.table(resultado)
+
+                    Swal.fire({
+                        title: 'Resultados de búsqueda',
+                        html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
+                        resultado.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+                        confirmButtonText: 'OK'
+                        })
+                    return
+                    }else{
+                        Swal.fire({
+                        title: 'No se encontraron coincidencias con: ' + palabraClave,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                        })
+                    }
+                }
+    }
+)}
 
 //funcion crear
 
@@ -227,17 +290,22 @@ function crearPokemon() {
     let nombre =  prompt("ingresa el nombre del pokemon")
     let tipo = prompt("que tipo es?")
     
-    if ( nombre == "" || tipo == ""){
+    if ( (nombre == ("" || null)) || (tipo == ("" || null))){
         alert("por favor ingresa valores validos")
         return
     }
-    let numero = lista.length + 1 // asi el nuevo pokemon siempre sera el numero que sigue en la lista
+    let numero = lista.length ++ // asi el nuevo pokemon siempre sera el numero que sigue en la lista
 
     let pokemon = new Pokemon (numero, nombre, tipo)
     lista.push(pokemon)
     console.table(lista[lista.length - 1])
-    alert("presona F12 para ver los datos del pokemon descubierto")
     ultimoNumero = lista[lista.length - 1].numero
+    Swal.fire({
+        icon: "success",
+        title: "Pokemon añadido!!!",
+        text: `Se ha agregado el pokemon: "${pokemon.nombre}" a la lista.`,
+        timer: 3000 // Tiempo en milisegundos para cerrar la ventana automáticamente
+      });
 }
 
 //cont ultimo numero declarado globalmente
@@ -261,6 +329,6 @@ let boton3 = document.getElementById("btn-tipo")
 boton3.addEventListener("click", buscarTipo)
 
 //Añadir nuevo pkm
-let boton4 = document.getElementById("btn-add")
+let boton5 = document.getElementById("btn-add")
 
-boton4.addEventListener("click", crearPokemon)
+boton5.addEventListener("click", crearPokemon)
