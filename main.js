@@ -180,6 +180,12 @@ let lista = [
     pokemon151
 ]
 
+// funciona añadir al Json datos del Localstorage
+if (localStorage.getItem("pokemones")) {
+    lista = JSON.parse(localStorage.getItem("pokemones"));
+  } else {
+    lista = lista
+  }
 //funciones buscar por nombre
 
 function buscarPokemon(){
@@ -287,30 +293,64 @@ function buscarTipo(){
 //funcion crear
 
 function crearPokemon() {
-    let nombre =  prompt("ingresa el nombre del pokemon")
-    let tipo = prompt("que tipo es?")
-    
-    if ( (nombre == ("" || null)) || (tipo == ("" || null))){
-        alert("por favor ingresa valores validos")
-        return
-    }
-    let numero = lista.length ++ // asi el nuevo pokemon siempre sera el numero que sigue en la lista
-
-    let pokemon = new Pokemon (numero, nombre, tipo)
-    lista.push(pokemon)
-    console.table(lista[lista.length - 1])
-    ultimoNumero = lista[lista.length - 1].numero
     Swal.fire({
-        icon: "success",
-        title: "Pokemon añadido!!!",
-        text: `Se ha agregado el pokemon: "${pokemon.nombre}" a la lista.`,
-        timer: 3000 // Tiempo en milisegundos para cerrar la ventana automáticamente
-      });
+        title: "Agregar Pokemon",
+        html:
+          `<label>Nombre:</label> <input id="nombre-input"    class="swal2-input" type="text" autofocus>
+
+           <label>Tipo:</label><input id="tipo-input"         class="swal2-input" type="text" autofocus>`,
+        showCancelButton: true,
+        confirmButtonText: "Agregar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+            if (result.isConfirmed) {
+                let nombre= document.getElementById("nombre-input").value.trim();
+                let tipo = document.getElementById("tipo-input").value.trim();
+                let numero = ultimoNumero +1 // asi el nuevo pokemon siempre sera el numero que sigue en la lista
+
+            if ( (nombre === ("" || null)) || (tipo === ("" || null))){ /* validacion para evitar string vacio y cancel */
+                Swal.fire({
+                    title: "Error",
+                    text: "Por favor ingresa valores válidos.",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+            })
+                return
+            }
+            let pokemon = new Pokemon (numero, nombre, tipo)
+
+            if (lista.some((nuevopkm) => nuevopkm.nombre === pokemon.nombre)) {
+                Swal.fire({
+                  icon: "warning",
+                  title: "Advertencia",
+                  text: "El pokemon ya existe en la lista."
+                });
+                return;
+              }
+                lista.push(pokemon)
+                localStorage.setItem("pokemones", JSON.stringify(lista));
+                console.table(lista[lista.length - 1])
+                
+                Swal.fire({
+                    icon: "success",
+                    title: "Pokemon añadido!!!",
+                    text: `Se ha agregado el pokemon: "${pokemon.nombre}" a la lista.`,
+                    timer: 3000 // Tiempo en milisegundos para cerrar la ventana automáticamente
+                });
+            }
+        }
+        )
 }
 
 //cont ultimo numero declarado globalmente
 
 let ultimoNumero = lista[lista.length - 1].numero
+
+//Remover acentos (no pude agregarlo al codigo, la sintaxis de la libreria sweet alert me resulto muy confusa)
+function removeAccents(text) {
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
 
                 //Botones
 //buscar por nombre
@@ -332,3 +372,72 @@ boton3.addEventListener("click", buscarTipo)
 let boton5 = document.getElementById("btn-add")
 
 boton5.addEventListener("click", crearPokemon)
+
+//Main contenedor de las cards declarado y funcion forEach para ver todos
+const mainContainer = document.querySelector('main');
+
+function verTodos (tipoFiltro = null) {
+    const pokemons = tipoFiltro ? lista.filter(pokemon => pokemon.tipo === tipoFiltro) : lista;
+    pokemons.forEach(pokemon => {
+    const pokemonCard = crearPokemonCard(pokemon);
+    mainContainer.appendChild(pokemonCard);
+})
+}
+    //ver todos
+let botonTodos = document.getElementById("ver-todos")
+
+botonTodos.addEventListener("click", () => verTodos())
+
+        //Normal
+let btnNormal = document.getElementById("normal")
+
+btnNormal.addEventListener("click",() => verTodos("normal"))
+
+        //fire
+let btnFuego = document.getElementById("fire")
+
+btnFuego.addEventListener("click",() => verTodos("fuego"))
+
+        //agua
+let btnAgua = document.getElementById("water")
+
+btnAgua.addEventListener("click",() => verTodos("agua"))
+
+        //Planta
+let btnPlanta = document.getElementById("grass")
+
+btnPlanta.addEventListener("click",() => verTodos("planta"))
+
+//crear elementos en el DOM
+
+function crearPokemonCard(pokemon) {
+    //div con la clase "poke-card"
+    const pokeCard = document.createElement('div');
+    pokeCard.classList.add('poke-card');
+
+    // titulo numero pkmn
+    const h2 = document.createElement('h2');
+    h2.textContent = `# ${pokemon.numero}`;
+
+    // nombre pkmn
+    const h3 = document.createElement('h3');
+    h3.textContent = pokemon.nombre;
+
+    // tipo pkmn
+    const p = document.createElement('p');
+    p.textContent = pokemon.tipo;
+
+    // Agregar numero, nombre y tipo
+    pokeCard.appendChild(h2);
+    pokeCard.appendChild(h3);
+    pokeCard.appendChild(p);
+
+    return pokeCard;
+}
+
+//filtros para cada tipo
+
+const tiposFuego = lista.filter(pokemon => pokemon.tipo === "Fuego")
+const tiposAgua = lista.filter(pokemon => pokemon.tipo === "Agua")
+const tiposPlanta = lista.filter(pokemon => pokemon.tipo === "Planta")
+const tiposEléctrico = lista.filter(pokemon => pokemon.tipo === "Eléctrico")

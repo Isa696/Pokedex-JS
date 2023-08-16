@@ -1,5 +1,4 @@
-Copy code
-/* CSS Reset */
+/* CSS Reseteo */
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li {
   margin: 0;
   padding: 0;
@@ -7,23 +6,32 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li {
   font-size: 100%;
   font: inherit;
   vertical-align: middle;
+  color: var(--clr-black);
+  font-family: 'Rubik', sans-serif;
 }
 
 /* Corrige el comportamiento de los elementos inline-block */
-/* Agregar más elementos aquí según sea necesario */
-/* Por ejemplo, algunos navegadores necesitan más correcciones */
-/* como input, button, etc. */
-
 /* Establece el espaciado de línea a 1 para evitar problemas de espacio entre elementos inline-block */
-/* Puedes ajustar esto según tus necesidades de diseño */
 body {
   line-height: 1;
   background-color: azure;
 }
 
-/* Elimina la decoración de los enlaces */
+/* Elimina estilos */
 a {
   text-decoration: none;
+}
+
+ul{
+  list-style: none;
+}
+
+/* Botones reseteo */
+
+button {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
 }
 
 /* Evita que las imágenes se comporten como elementos inline */
@@ -42,6 +50,32 @@ img {
     font-style: normal;
   }
 
+/* variables colores */
+
+:root {
+  --clr-black: #1c1c1c;
+  --clr-gray: #ececec;
+  --clr-white: #f7f7f7;
+  --type-normal: #A8A878;
+  --type-fire: #F08030;
+  --type-water: #6890F0;
+  --type-grass: #78C850;
+  --type-electric: #F8D030;
+  --type-ice: #98D8D8;
+  --type-fighting: #C03028;
+  --type-poison: #A040A0;
+  --type-ground: #E0C068;
+  --type-flying: #A890F0;
+  --type-psychic: #F85888;
+  --type-bug: #A8B820;
+  --type-rock: #B8A038;
+  --type-ghost: #705898;
+  --type-dark: #705848;
+  --type-dragon: #7038F8;
+  --type-steel: #B8B8D0;
+  --type-fairy: #F0B6BC;
+}
+
 /* Estilos titulos */
 
 .main-title {
@@ -58,6 +92,10 @@ img {
     text-align: center;
     margin: .25em;
     padding: .25em;
+    color: #ffcc03;
+    background-color: rgba(14, 85, 217, 0.906);
+    border-radius: 15px;
+    padding: .5em;
 }
 
 /*contenedor Titulos nav */
@@ -72,14 +110,151 @@ img {
     justify-content: center;
     gap: 1em;
     padding: .5em;
-}
+  }
 
-/* contenedor botones */
+/* contenedor botones buscar crear */
 
 .botones-nav{
     width: 98vw;
     height: fit-content;
     display: flex;
-    flex-flow: row, wrap;
+    flex-flow: row wrap;
     justify-content: space-around;
+    gap: 1em;
+    padding: .5em;
+}
+
+/* Contenedores TIPOS */
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: .5em;
+}
+
+/* Botones TIPOS */
+
+.btn-header {
+  background-color: var(--clr-gray);
+  padding: .5rem;
+  border-radius: 100vmax;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+  transition: .2s;
+}
+
+.btn-header:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 2rem rgba(0, 0, 0, .25);
+}
+
+/* Estilos tipos */
+
+
+.normal {
+  background-color: var(--type-normal);
+  color: var(--clr-black);
+}
+
+.fire {
+  background-color: var(--type-fire);
+  color: var(--clr-black);
+}
+
+.water {
+  background-color: var(--type-water);
+  color: var(--clr-white);
+}
+
+.grass {
+  background-color: var(--type-grass);
+  color: var(--clr-black);
+}
+
+.electric {
+  background-color: var(--type-electric);
+  color: var(--clr-black);
+}
+
+.ice {
+  background-color: var(--type-ice);
+  color: var(--clr-black);
+}
+
+.fighting {
+  background-color: var(--type-fighting);
+  color: var(--clr-white);
+}
+
+.poison {
+  background-color: var(--type-poison);
+  color: var(--clr-white);
+}
+
+.ground {
+  background-color: var(--type-ground);
+  color: var(--clr-black);
+}
+
+.flying {
+  background-color: var(--type-flying);
+  color: var(--clr-black);
+}
+
+.psychic {
+  background-color: var(--type-psychic);
+  color: var(--clr-black);
+}
+
+.bug {
+  background-color: var(--type-bug);
+  color: var(--clr-black);
+}
+
+.rock {
+  background-color: var(--type-rock);
+  color: var(--clr-black);
+}
+
+.ghost {
+  background-color: var(--type-ghost);
+  color: var(--clr-white);
+}
+
+.dragon {
+  background-color: var(--type-dragon);
+  color: var(--clr-white);
+}
+
+.steel {
+  background-color: var(--type-steel);
+  color: var(--clr-black);
+}
+
+.fairy {
+  background-color: var(--type-fairy);
+  color: var(--clr-black);
+}
+
+.card-container{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.poke-card{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--clr-gray);
+  border:3px double #1c1c1c;
+  border-radius: 5px;
+  gap: 0.5em;
 }

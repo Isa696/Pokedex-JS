@@ -1,0 +1,759 @@
+{
+  "pokemones" : [
+  {
+    "numero": 1,
+    "nombre": "Bulbasaur",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 2,
+    "nombre": "Ivysaur",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 3,
+    "nombre": "Venusaur",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 4,
+    "nombre": "Charmander",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 5,
+    "nombre": "Charmeleon",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 6,
+    "nombre": "Charizard",
+    "tipo": "fuego volador"
+  },
+  {
+    "numero": 7,
+    "nombre": "Squirtle",
+    "tipo": "agua"
+  },
+  {
+    "numero": 8,
+    "nombre": "Wartortle",
+    "tipo": "agua"
+  },
+  {
+    "numero": 9,
+    "nombre": "Blastoise",
+    "tipo": "agua"
+  },
+  {
+    "numero": 10,
+    "nombre": "Caterpie",
+    "tipo": "bicho"
+  },
+  {
+    "numero": 11,
+    "nombre": "Metapod",
+    "tipo": "bicho"
+  },
+  {
+    "numero": 12,
+    "nombre": "Butterfree",
+    "tipo": "bicho volador"
+  },
+  {
+    "numero": 13,
+    "nombre": "Weedle",
+    "tipo": "bicho veneno"
+  },
+  {
+    "numero": 14,
+    "nombre": "Kakuna",
+    "tipo": "bicho veneno"
+  },
+  {
+    "numero": 15,
+    "nombre": "Beedrill",
+    "tipo": "bicho veneno"
+  },
+  {
+    "numero": 16,
+    "nombre": "Pidgey",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 17,
+    "nombre": "Pidgeotto",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 18,
+    "nombre": "Pidgeot",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 19,
+    "nombre": "Rattata",
+    "tipo": "normal"
+  },
+  {
+    "numero": 20,
+    "nombre": "Raticate",
+    "tipo": "normal"
+  },
+  {
+    "numero": 21,
+    "nombre": "Spearow",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 22,
+    "nombre": "Fearow",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 23,
+    "nombre": "Ekans",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 24,
+    "nombre": "Arbok",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 25,
+    "nombre": "Pikachu",
+    "tipo": "eléctrico"
+  },
+  {
+    "numero": 26,
+    "nombre": "Raichu",
+    "tipo": "eléctrico"
+  },
+  {
+    "numero": 27,
+    "nombre": "Sandshrew",
+    "tipo": "tierra"
+  },
+  {
+    "numero": 28,
+    "nombre": "Sandslash",
+    "tipo": "tierra"
+  },
+  {
+    "numero": 29,
+    "nombre": "Nidoran♀",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 30,
+    "nombre": "Nidorina",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 31,
+    "nombre": "Nidoqueen",
+    "tipo": "veneno tierra"
+  },
+  {
+    "numero": 32,
+    "nombre": "Nidoran♂",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 33,
+    "nombre": "Nidorino",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 34,
+    "nombre": "Nidoking",
+    "tipo": "veneno tierra"
+  },
+  {
+    "numero": 35,
+    "nombre": "Clefairy",
+    "tipo": "hada"
+  },
+  {
+    "numero": 36,
+    "nombre": "Clefable",
+    "tipo": "hada"
+  },
+  {
+    "numero": 37,
+    "nombre": "Vulpix",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 38,
+    "nombre": "Ninetales",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 39,
+    "nombre": "Jigglypuff",
+    "tipo": "normal hada"
+  },
+  {
+    "numero": 40,
+    "nombre": "Wigglytuff",
+    "tipo": "normal hada"
+  },
+  {
+    "numero": 41,
+    "nombre": "Zubat",
+    "tipo": "veneno volador"
+  },
+  {
+    "numero": 42,
+    "nombre": "Golbat",
+    "tipo": "veneno volador"
+  },
+  {
+    "numero": 43,
+    "nombre": "Oddish",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 44,
+    "nombre": "Gloom",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 45,
+    "nombre": "Vileplume",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 46,
+    "nombre": "Paras",
+    "tipo": "bicho planta"
+  },
+  {
+    "numero": 47,
+    "nombre": "Parasect",
+    "tipo": "bicho planta"
+  },
+  {
+    "numero": 48,
+    "nombre": "Venonat",
+    "tipo": "bicho veneno"
+  },
+  {
+    "numero": 49,
+    "nombre": "Venomoth",
+    "tipo": "bicho veneno"
+  },
+  {
+    "numero": 50,
+    "nombre": "Diglett",
+    "tipo": "tierra"
+  },
+  {
+    "numero": 51,
+    "nombre": "Dugtrio",
+    "tipo": "tierra"
+  },
+  {
+    "numero": 52,
+    "nombre": "Meowth",
+    "tipo": "normal"
+  },
+  {
+    "numero": 53,
+    "nombre": "Persian",
+    "tipo": "normal"
+  },
+  {
+    "numero": 54,
+    "nombre": "Psyduck",
+    "tipo": "agua"
+  },
+  {
+    "numero": 55,
+    "nombre": "Golduck",
+    "tipo": "agua"
+  },
+  {
+    "numero": 56,
+    "nombre": "Mankey",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 57,
+    "nombre": "Primeape",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 58,
+    "nombre": "Growlithe",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 59,
+    "nombre": "Arcanine",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 60,
+    "nombre": "Poliwag",
+    "tipo": "agua"
+  },
+  {
+    "numero": 61,
+    "nombre": "Poliwhirl",
+    "tipo": "agua"
+  },
+  {
+    "numero": 62,
+    "nombre": "Poliwrath",
+    "tipo": "agua lucha"
+  },
+  {
+    "numero": 63,
+    "nombre": "Abra",
+    "tipo": "psíquico"
+  },
+  {
+    "numero": 64,
+    "nombre": "Kadabra",
+    "tipo": "psíquico"
+  },
+  {
+    "numero": 65,
+    "nombre": "Alakazam",
+    "tipo": "psíquico"
+  },
+  {
+    "numero": 66,
+    "nombre": "Machop",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 67,
+    "nombre": "Machoke",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 68,
+    "nombre": "Machamp",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 69,
+    "nombre": "Bellsprout",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 70,
+    "nombre": "Weepinbell",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 71,
+    "nombre": "Victreebel",
+    "tipo": "planta veneno"
+  },
+  {
+    "numero": 72,
+    "nombre": "Tentacool",
+    "tipo": "agua veneno"
+  },
+  {
+    "numero": 73,
+    "nombre": "Tentacruel",
+    "tipo": "agua veneno"
+  },
+  {
+    "numero": 74,
+    "nombre": "Geodude",
+    "tipo": "roca tierra"
+  },
+  {
+    "numero": 75,
+    "nombre": "Graveler",
+    "tipo": "roca tierra"
+  },
+  {
+    "numero": 76,
+    "nombre": "Golem",
+    "tipo": "roca tierra"
+  },
+  {
+    "numero": 77,
+    "nombre": "Ponyta",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 78,
+    "nombre": "Rapidash",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 79,
+    "nombre": "Slowpoke",
+    "tipo": "agua psíquico"
+  },
+  {
+    "numero": 80,
+    "nombre": "Slowbro",
+    "tipo": "agua psíquico"
+  },
+  {
+    "numero": 81,
+    "nombre": "Magnemite",
+    "tipo": "eléctrico acero"
+  },
+  {
+    "numero": 82,
+    "nombre": "Magneton",
+    "tipo": "eléctrico acero"
+  },
+  {
+    "numero": 83,
+    "nombre": "Farfetch'd",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 84,
+    "nombre": "Doduo",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 85,
+    "nombre": "Dodrio",
+    "tipo": "normal volador"
+  },
+  {
+    "numero": 86,
+    "nombre": "Seel",
+    "tipo": "agua"
+  },
+  {
+    "numero": 87,
+    "nombre": "Dewgong",
+    "tipo": "agua hielo"
+  },
+  {
+    "numero": 88,
+    "nombre": "Grimer",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 89,
+    "nombre": "Muk",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 90,
+    "nombre": "Shellder",
+    "tipo": "agua"
+  },
+  {
+    "numero": 91,
+    "nombre": "Cloyster",
+    "tipo": "agua hielo"
+  },
+  {
+    "numero": 92,
+    "nombre": "Gastly",
+    "tipo": "fantasma veneno"
+  },
+  {
+    "numero": 93,
+    "nombre": "Haunter",
+    "tipo": "fantasma veneno"
+  },
+  {
+    "numero": 94,
+    "nombre": "Gengar",
+    "tipo": "fantasma veneno"
+  },
+  {
+    "numero": 95,
+    "nombre": "Onix",
+    "tipo": "roca tierra"
+  },
+  {
+    "numero": 96,
+    "nombre": "Drowzee",
+    "tipo": "psíquico"
+  },
+  {
+    "numero": 97,
+    "nombre": "Hypno",
+    "tipo": "psíquico"
+  },
+  {
+    "numero": 98,
+    "nombre": "Krabby",
+    "tipo": "agua"
+  },
+  {
+    "numero": 99,
+    "nombre": "Kingler",
+    "tipo": "agua"
+  },
+  {
+    "numero": 100,
+    "nombre": "Voltorb",
+    "tipo": "eléctrico"
+  },
+  {
+    "numero": 101,
+    "nombre": "Electrode",
+    "tipo": "eléctrico"
+  },
+  {
+    "numero": 102,
+    "nombre": "Exeggcute",
+    "tipo": "planta psíquico"
+  },
+  {
+    "numero": 103,
+    "nombre": "Exeggutor",
+    "tipo": "planta psíquico"
+  },
+  {
+    "numero": 104,
+    "nombre": "Cubone",
+    "tipo": "suelo"
+  },
+  {
+    "numero": 105,
+    "nombre": "Marowak",
+    "tipo": "suelo"
+  },
+  {
+    "numero": 106,
+    "nombre": "Hitmonlee",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 107,
+    "nombre": "Hitmonchan",
+    "tipo": "lucha"
+  },
+  {
+    "numero": 108,
+    "nombre": "Lickitung",
+    "tipo": "normal"
+  },
+  {
+    "numero": 109,
+    "nombre": "Koffing",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 110,
+    "nombre": "Weezing",
+    "tipo": "veneno"
+  },
+  {
+    "numero": 111,
+    "nombre": "Rhyhorn",
+    "tipo": "suelo roca"
+  },
+  {
+    "numero": 112,
+    "nombre": "Rhydon",
+    "tipo": "suelo roca"
+  },
+  {
+    "numero": 113,
+    "nombre": "Chansey",
+    "tipo": "normal"
+  },
+  {
+    "numero": 114,
+    "nombre": "Tangela",
+    "tipo": "planta"
+  },
+  {
+    "numero": 115,
+    "nombre": "Kangaskhan",
+    "tipo": "normal"
+  },
+  {
+    "numero": 116,
+    "nombre": "Horsea",
+    "tipo": "agua"
+  },
+  {
+    "numero": 117,
+    "nombre": "Seadra",
+    "tipo": "agua"
+  },
+  {
+    "numero": 118,
+    "nombre": "Goldeen",
+    "tipo": "agua"
+  },
+  {
+    "numero": 119,
+    "nombre": "Seaking",
+    "tipo": "agua"
+  },
+  {
+    "numero": 120,
+    "nombre": "Staryu",
+    "tipo": "agua"
+  },
+  {
+    "numero": 121,
+    "nombre": "Starmie",
+    "tipo": "agua psíquico"
+  },
+  {
+    "numero": 122,
+    "nombre": "Mr. Mime",
+    "tipo": "psíquico hada"
+  },
+  {
+    "numero": 123,
+    "nombre": "Scyther",
+    "tipo": "bicho volador"
+  },
+  {
+    "numero": 124,
+    "nombre": "Jynx",
+    "tipo": "hielo psíquico"
+  },
+  {
+    "numero": 125,
+    "nombre": "Electabuzz",
+    "tipo": "eléctrico"
+  },
+  {
+    "numero": 126,
+    "nombre": "Magmar",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 127,
+    "nombre": "Pinsir",
+    "tipo": "bicho"
+  },
+  {
+    "numero": 128,
+    "nombre": "Tauros",
+    "tipo": "normal"
+  },
+  {
+    "numero": 129,
+    "nombre": "Magikarp",
+    "tipo": "agua"
+  },
+  {
+    "numero": 130,
+    "nombre": "Gyarados",
+    "tipo": "agua volador"
+  },
+  {
+    "numero": 131,
+    "nombre": "Lapras",
+    "tipo": "agua hielo"
+  },
+  {
+    "numero": 132,
+    "nombre": "Ditto",
+    "tipo": "normal"
+  },
+  {
+    "numero": 133,
+    "nombre": "Eevee",
+    "tipo": "normal"
+  },
+  {
+    "numero": 134,
+    "nombre": "Vaporeon",
+    "tipo": "agua"
+  },
+  {
+    "numero": 135,
+    "nombre": "Jolteon",
+    "tipo": "eléctrico"
+  },
+  {
+    "numero": 136,
+    "nombre": "Flareon",
+    "tipo": "fuego"
+  },
+  {
+    "numero": 137,
+    "nombre": "Porygon",
+    "tipo": "normal"
+  },
+  {
+    "numero": 138,
+    "nombre": "Omanyte",
+    "tipo": "roca agua"
+  },
+  {
+    "numero": 139,
+    "nombre": "Omastar",
+    "tipo": "roca agua"
+  },
+  {
+    "numero": 140,
+    "nombre": "Kabuto",
+    "tipo": "roca agua"
+  },
+  {
+    "numero": 141,
+    "nombre": "Kabutops",
+    "tipo": "roca agua"
+  },
+  {
+    "numero": 142,
+    "nombre": "Aerodactyl",
+    "tipo": "roca volador"
+  },
+  {
+    "numero": 143,
+    "nombre": "Snorlax",
+    "tipo": "normal"
+  },
+  {
+    "numero": 144,
+    "nombre": "Articuno",
+    "tipo": "hielo volador"
+  },
+  {
+    "numero": 145,
+    "nombre": "Zapdos",
+    "tipo": "eléctrico volador"
+  },
+  {
+    "numero": 146,
+    "nombre": "Moltres",
+    "tipo": "fuego volador"
+  },
+  {
+    "numero": 147,
+    "nombre": "Dratini",
+    "tipo": "dragón"
+  },
+  {
+    "numero": 148,
+    "nombre": "Dragonair",
+    "tipo": "dragón"
+  },
+  {
+    "numero": 149,
+    "nombre": "Dragonite",
+    "tipo": "dragón volador"
+  },
+  {
+    "numero": 150,
+    "nombre": "Mewtwo",
+    "tipo": "psíquico"
+  },
+  {
+    "numero": 151,
+    "nombre": "Mew",
+    "tipo": "psíquico"
+  }
+]
+}
