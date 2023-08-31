@@ -278,12 +278,12 @@
   {
     "numero": 56,
     "nombre": "Mankey",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 57,
     "nombre": "Primeape",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 58,
@@ -308,7 +308,7 @@
   {
     "numero": 62,
     "nombre": "Poliwrath",
-    "tipo": "agua lucha"
+    "tipo": "agua luchador"
   },
   {
     "numero": 63,
@@ -328,17 +328,17 @@
   {
     "numero": 66,
     "nombre": "Machop",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 67,
     "nombre": "Machoke",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 68,
     "nombre": "Machamp",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 69,
@@ -528,12 +528,12 @@
   {
     "numero": 106,
     "nombre": "Hitmonlee",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 107,
     "nombre": "Hitmonchan",
-    "tipo": "lucha"
+    "tipo": "luchador"
   },
   {
     "numero": 108,

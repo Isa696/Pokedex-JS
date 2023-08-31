@@ -1,3 +1,42 @@
+/* url guardada en const */
+const URL = "https://pokeapi.co/api/v2/pokemon/"
+
+//Array para almacenar promesas API
+const fetchPromises = []
+
+//Consumo API
+for (let i = 1 ; i <= 151 ; i++){
+    fetchPromises.push(
+        fetch(URL + i)
+        .then((response) => response.json())
+        .then((data) => {
+            const pokemonData ={
+                imgPkm : data.sprites.other["official-artwork"].front_default,
+                alturaPkm : data.height,
+                pesoPkm : data.weight
+            }
+            return pokemonData
+        })
+        )
+    }
+
+    // Función para agregar datos API dentro de cada objeto pokemon
+    function agregarDatosApi(pokemon, pokemonData) {
+        pokemon.imgPkm = pokemonData.imgPkm
+        pokemon.alturaPkm = pokemonData.alturaPkm
+        pokemon.pesoPkm = pokemonData.pesoPkm
+    }
+
+Promise.all(fetchPromises)
+  .then((pokemonDataArray) => {
+    for (let i = 0; i < lista.length; i++) {
+      agregarDatosApi(lista[i], pokemonDataArray[i])
+    }
+  })
+  .catch((error) => {
+    console.error("Error al obtener los datos de la API:", error)
+  })
+
 //funcion constructora
 const Pokemon = function(numero, nombre, tipo) {
     this.numero = numero
@@ -5,7 +44,7 @@ const Pokemon = function(numero, nombre, tipo) {
     this.tipo = tipo
     }
 
-//pokemones lista con datos
+    //pokemones lista con datos
 
 let pokemon1 = new Pokemon(1, "Bulbasaur", "planta veneno");
 let pokemon2 = new Pokemon(2, "Ivysaur", "planta veneno");
@@ -62,19 +101,19 @@ let pokemon52 = new Pokemon(52, "Meowth", "normal");
 let pokemon53 = new Pokemon(53, "Persian", "normal");
 let pokemon54 = new Pokemon(54, "Psyduck", "agua");
 let pokemon55 = new Pokemon(55, "Golduck", "agua");
-let pokemon56 = new Pokemon(56, "Mankey", "lucha");
-let pokemon57 = new Pokemon(57, "Primeape", "lucha");
+let pokemon56 = new Pokemon(56, "Mankey", "luchador");
+let pokemon57 = new Pokemon(57, "Primeape", "luchador");
 let pokemon58 = new Pokemon(58, "Growlithe", "fuego");
 let pokemon59 = new Pokemon(59, "Arcanine", "fuego");
 let pokemon60 = new Pokemon(60, "Poliwag", "agua");
 let pokemon61 = new Pokemon(61, "Poliwhirl", "agua");
-let pokemon62 = new Pokemon(62, "Poliwrath", "agua lucha");
+let pokemon62 = new Pokemon(62, "Poliwrath", "agua luchador");
 let pokemon63 = new Pokemon(63, "Abra", "psíquico");
 let pokemon64 = new Pokemon(64, "Kadabra", "psíquico");
 let pokemon65 = new Pokemon(65, "Alakazam", "psíquico");
-let pokemon66 = new Pokemon(66, "Machop", "lucha");
-let pokemon67 = new Pokemon(67, "Machoke", "lucha");
-let pokemon68 = new Pokemon(68, "Machamp", "lucha");
+let pokemon66 = new Pokemon(66, "Machop", "luchador");
+let pokemon67 = new Pokemon(67, "Machoke", "luchador");
+let pokemon68 = new Pokemon(68, "Machamp", "luchador");
 let pokemon69 = new Pokemon(69, "Bellsprout", "planta veneno");
 let pokemon70 = new Pokemon(70, "Weepinbell", "planta veneno");
 let pokemon71 = new Pokemon(71, "Victreebel", "planta veneno");
@@ -110,15 +149,15 @@ let pokemon100 = new Pokemon(100, "Voltorb", "eléctrico");
 let pokemon101 = new Pokemon(101, "Electrode", "eléctrico");
 let pokemon102 = new Pokemon(102, "Exeggcute", "planta psíquico");
 let pokemon103 = new Pokemon(103, "Exeggutor", "planta psíquico");
-let pokemon104 = new Pokemon(104, "Cubone", "suelo");
-let pokemon105 = new Pokemon(105, "Marowak", "suelo");
-let pokemon106 = new Pokemon(106, "Hitmonlee", "lucha");
-let pokemon107 = new Pokemon(107, "Hitmonchan", "lucha");
+let pokemon104 = new Pokemon(104, "Cubone", "tierra");
+let pokemon105 = new Pokemon(105, "Marowak", "tierra");
+let pokemon106 = new Pokemon(106, "Hitmonlee", "luchador");
+let pokemon107 = new Pokemon(107, "Hitmonchan", "luchador");
 let pokemon108 = new Pokemon(108, "Lickitung", "normal");
 let pokemon109 = new Pokemon(109, "Koffing", "veneno");
 let pokemon110 = new Pokemon(110, "Weezing", "veneno");
-let pokemon111 = new Pokemon(111, "Rhyhorn", "suelo roca");
-let pokemon112 = new Pokemon(112, "Rhydon", "suelo roca");
+let pokemon111 = new Pokemon(111, "Rhyhorn", "tierra roca");
+let pokemon112 = new Pokemon(112, "Rhydon", "tierra roca");
 let pokemon113 = new Pokemon(113, "Chansey", "normal");
 let pokemon114 = new Pokemon(114, "Tangela", "planta");
 let pokemon115 = new Pokemon(115, "Kangaskhan", "normal");
@@ -181,12 +220,9 @@ let lista = [
 ]
 
 // funciona añadir al Json datos del Localstorage
-if (localStorage.getItem("pokemones")) {
-    lista = JSON.parse(localStorage.getItem("pokemones"));
-  } else {
-    lista = lista
-  }
-//funciones buscar por nombre
+    localStorage.getItem("pokemones") ? lista = JSON.parse(localStorage.getItem("pokemones")) : lista = lista;
+
+    //funciones buscar por nombre
 
 function buscarPokemon(){
     Swal.fire({
@@ -202,6 +238,8 @@ function buscarPokemon(){
             let resultado = lista.filter ((pokemon) => pokemon.nombre.toLowerCase().includes(palabraClave))
                 if (resultado.length > 0){
                     console.table(resultado)
+                    const resultadoJson = JSON.stringify(resultado)
+                    sessionStorage.setItem('resultado', resultadoJson)
 
                     Swal.fire({
                         title: 'Resultados de búsqueda',
@@ -236,7 +274,9 @@ function buscarNumero(){
                 numBuscado = parseInt(numBuscado)
                 let resultado = lista.filter ( (pokemon) => pokemon.numero === numBuscado)
                 if(resultado.length > 0){
-                console.table(resultado);
+                console.table(resultado)
+                const resultadoJson = JSON.stringify(resultado)
+                sessionStorage.setItem('resultado', resultadoJson)
 
                     Swal.fire({
                         title: 'Resultados de búsqueda',
@@ -271,7 +311,8 @@ function buscarTipo(){
             let resultado = lista.filter ((pokemon) => pokemon.tipo.toLowerCase().includes(palabraClave))
                 if (resultado.length > 0){
                     console.table(resultado)
-
+                    const resultadoJson = JSON.stringify(resultado)
+                    sessionStorage.setItem('resultado', resultadoJson)
                     Swal.fire({
                         title: 'Resultados de búsqueda',
                         html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
@@ -324,24 +365,49 @@ function crearPokemon() {
                   icon: "warning",
                   title: "Advertencia",
                   text: "El pokemon ya existe en la lista."
-                });
-                return;
+                })
+                return
               }
                 lista.push(pokemon)
                 localStorage.setItem("pokemones", JSON.stringify(lista));
                 console.table(lista[lista.length - 1])
-                
+                const resultadoJson = JSON.stringify(resultado)
+                sessionStorage.setItem('resultado', resultadoJson)
+
                 Swal.fire({
                     icon: "success",
                     title: "Pokemon añadido!!!",
                     text: `Se ha agregado el pokemon: "${pokemon.nombre}" a la lista.`,
                     timer: 3000 // Tiempo en milisegundos para cerrar la ventana automáticamente
-                });
+                })
             }
         }
         )
 }
 
+//Funcion buscar aleatorio
+
+function buscarAleatorio (){
+    let aleatorio = Math.floor(Math.random() * 151) + 1
+    let resultado = lista.filter ( (pokemon) => pokemon.numero === aleatorio)
+    Swal.fire({
+        title: 'Resultados de búsqueda',
+        html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
+        resultado.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+        confirmButtonText: 'OK'
+        })
+}
+
+//funcion Mostrar recientes
+function mostrarRecientes(){
+    let pokemonGuardado = JSON.parse(sessionStorage.getItem('resultado'))
+Swal.fire({
+    title: 'Ultimas busquedas',
+    html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
+    pokemonGuardado.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+    confirmButtonText: 'OK'
+    })
+}
 //cont ultimo numero declarado globalmente
 
 let ultimoNumero = lista[lista.length - 1].numero
@@ -351,62 +417,188 @@ function removeAccents(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 
-
-                //Botones
-//buscar por nombre
-let boton = document.getElementById("btn-name")
-
-boton.addEventListener("click", buscarPokemon)
-
-//buscar por numero
-let boton2 = document.getElementById("btn-num")
-
-boton2.addEventListener("click", buscarNumero)
-
-//buscar por tipo
-let boton3 = document.getElementById("btn-tipo")
-
-boton3.addEventListener("click", buscarTipo)
-
-//Añadir nuevo pkm
-let boton5 = document.getElementById("btn-add")
-
-boton5.addEventListener("click", crearPokemon)
-
-//Main contenedor de las cards declarado y funcion forEach para ver todos
-const mainContainer = document.querySelector('main');
-
+//funcion forEach para ver todos, Tambien para ver Tipos
 function verTodos (tipoFiltro = null) {
-    const pokemons = tipoFiltro ? lista.filter(pokemon => pokemon.tipo === tipoFiltro) : lista;
+    const pokemons = tipoFiltro ? lista.filter(pokemon => pokemon.tipo.includes(tipoFiltro)) : lista;
     pokemons.forEach(pokemon => {
     const pokemonCard = crearPokemonCard(pokemon);
     mainContainer.appendChild(pokemonCard);
 })
 }
+
+                //Botones
+//buscar por nombre
+let btnNombre = document.getElementById("btn-name")
+
+btnNombre.addEventListener("click", buscarPokemon)
+
+//buscar por numero
+let btnNum = document.getElementById("btn-num")
+
+btnNum.addEventListener("click", buscarNumero)
+
+//buscar por tipo
+let btnTipo = document.getElementById("btn-tipo")
+
+btnTipo.addEventListener("click", buscarTipo)
+
+//Añadir nuevo pkm
+let btnAdd = document.getElementById("btn-add")
+
+btnAdd.addEventListener("click", crearPokemon)
+
+//Buscar aleatorio
+let btnRandom = document.getElementById("btn-random")
+
+btnRandom.addEventListener("click", buscarAleatorio)
+
+//Recientes
+let btnRecientes = document.getElementById("btn-recientes")
+
+btnRecientes.addEventListener("click", mostrarRecientes)
     //ver todos
 let botonTodos = document.getElementById("ver-todos")
 
-botonTodos.addEventListener("click", () => verTodos())
+botonTodos.addEventListener("click", () => {
+    removerCards()
+    verTodos()
+})
 
         //Normal
 let btnNormal = document.getElementById("normal")
 
-btnNormal.addEventListener("click",() => verTodos("normal"))
+btnNormal.addEventListener("click",() =>{
+    removerCards()
+    verTodos("normal")
+})
 
-        //fire
+        //fuego
 let btnFuego = document.getElementById("fire")
 
-btnFuego.addEventListener("click",() => verTodos("fuego"))
+btnFuego.addEventListener("click",() => {
+    removerCards()
+    verTodos("fuego")
+})
 
         //agua
 let btnAgua = document.getElementById("water")
 
-btnAgua.addEventListener("click",() => verTodos("agua"))
+btnAgua.addEventListener("click",() => {
+    removerCards()
+    verTodos("agua")
+})
 
         //Planta
 let btnPlanta = document.getElementById("grass")
 
-btnPlanta.addEventListener("click",() => verTodos("planta"))
+btnPlanta.addEventListener("click",() => {
+    removerCards()
+    verTodos("planta")
+})
+
+        //Electrico
+let btnElect = document.getElementById("electric")
+
+btnElect.addEventListener("click",() => {
+    removerCards()
+    verTodos("eléctrico")
+})
+
+        //Hielo
+let btnIce = document.getElementById("ice")
+
+btnIce.addEventListener("click",() => {
+    removerCards()
+    verTodos("hielo")
+})
+
+        //Luchador
+let btnLucha = document.getElementById("fighting")
+
+btnLucha.addEventListener("click",() =>{
+    removerCards()
+    verTodos("luchador")
+})
+
+        //Veneno
+let btnVen = document.getElementById("poison")
+
+btnVen.addEventListener("click",() => {
+    removerCards()
+    verTodos("veneno")})
+
+        //Tierra
+let btnTierra = document.getElementById("ground")
+
+btnTierra.addEventListener("click",() => {
+    removerCards()
+    verTodos("tierra")})
+
+        //Volador
+let btnVolador = document.getElementById("flying")
+
+btnVolador.addEventListener("click",() => {
+    removerCards()
+    verTodos("volador")})
+
+        //Psíquico
+let btnPsiq = document.getElementById("psychic")
+
+btnPsiq.addEventListener("click",() => {
+    removerCards()
+    verTodos("psíquico")})
+
+        //Bicho
+let btnBicho = document.getElementById("bug")
+
+btnBicho.addEventListener("click",() => {
+    removerCards()
+    verTodos("bicho")})
+
+        //Roca
+let btnRoca = document.getElementById("rock")
+
+btnRoca.addEventListener("click",() => {
+    removerCards()
+    verTodos("roca")})
+
+        //Fantasma
+let btnFant = document.getElementById("ghost")
+
+btnFant.addEventListener("click",() => {
+    removerCards()
+    verTodos("fantasma")})
+
+        //Dragón
+let btnDrag = document.getElementById("dragon")
+
+btnDrag.addEventListener("click",() => {
+    removerCards()
+    verTodos("dragón")})
+
+        //Acero
+let btnAcero = document.getElementById("steel")
+
+btnAcero.addEventListener("click",() => {
+    removerCards()
+    verTodos("acero")})
+
+        //Hada
+let btnHada = document.getElementById("fairy")
+
+btnHada.addEventListener("click",() => {
+    removerCards()
+    verTodos("hada")})
+
+//Main contenedor de las cards declarado
+const mainContainer = document.querySelector('main');
+
+    //funcion remover cards
+function removerCards() {
+    while (mainContainer.firstChild) {
+        mainContainer.removeChild(mainContainer.firstChild)
+    }
+}
 
 //crear elementos en el DOM
 
@@ -415,12 +607,24 @@ function crearPokemonCard(pokemon) {
     const pokeCard = document.createElement('div');
     pokeCard.classList.add('poke-card');
 
-    // titulo numero pkmn
+    // numero pkmn
     const h2 = document.createElement('h2');
     h2.textContent = `# ${pokemon.numero}`;
+    h2.classList.add("nav-title2")
 
+const div = document.createElement("div");
+    div.innerHTML = `
+    <div class="pokemon-imagen">
+        <img src="${pokemon.imgPkm}" alt="${pokemon.nombre}">
+    </div>
+    <div class="pokemon-stats">
+        <p class="stat">${pokemon.alturaPkm}m</p>
+        <p class="stat">${pokemon.pesoPkm}kg</p>
+    </div>
+    `
     // nombre pkmn
     const h3 = document.createElement('h3');
+    h3.classList.add(`btn-header`)
     h3.textContent = pokemon.nombre;
 
     // tipo pkmn
@@ -430,14 +634,8 @@ function crearPokemonCard(pokemon) {
     // Agregar numero, nombre y tipo
     pokeCard.appendChild(h2);
     pokeCard.appendChild(h3);
+    pokeCard.appendChild(div)
     pokeCard.appendChild(p);
 
     return pokeCard;
 }
-
-//filtros para cada tipo
-
-const tiposFuego = lista.filter(pokemon => pokemon.tipo === "Fuego")
-const tiposAgua = lista.filter(pokemon => pokemon.tipo === "Agua")
-const tiposPlanta = lista.filter(pokemon => pokemon.tipo === "Planta")
-const tiposEléctrico = lista.filter(pokemon => pokemon.tipo === "Eléctrico")
