@@ -219,7 +219,7 @@ let lista = [
     pokemon151
 ]
 
-// funciona añadir al Json datos del Localstorage
+// añadir al Json datos del Localstorage
     localStorage.getItem("pokemones") ? lista = JSON.parse(localStorage.getItem("pokemones")) : lista = lista;
 
     //funciones buscar por nombre
@@ -235,11 +235,11 @@ function buscarPokemon(){
 
         preConfirm: (palabraClave) => {
             palabraClave = palabraClave.toLowerCase().trim()
-            let resultado = lista.filter ((pokemon) => pokemon.nombre.toLowerCase().includes(palabraClave))
+            let resultado = lista.filter ((pokemon) => removeAccents( pokemon.nombre).toLowerCase().includes(palabraClave))
                 if (resultado.length > 0){
                     console.table(resultado)
-                    const resultadoJson = JSON.stringify(resultado)
-                    sessionStorage.setItem('resultado', resultadoJson)
+                    localStoragePkmHistorial(resultado)
+                    guardarSessionStoragePkm(resultado)
 
                     Swal.fire({
                         title: 'Resultados de búsqueda',
@@ -275,9 +275,8 @@ function buscarNumero(){
                 let resultado = lista.filter ( (pokemon) => pokemon.numero === numBuscado)
                 if(resultado.length > 0){
                 console.table(resultado)
-                const resultadoJson = JSON.stringify(resultado)
-                sessionStorage.setItem('resultado', resultadoJson)
-
+                localStoragePkmHistorial(resultado)
+                guardarSessionStoragePkm(resultado)
                     Swal.fire({
                         title: 'Resultados de búsqueda',
                         html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
@@ -308,11 +307,11 @@ function buscarTipo(){
 
         preConfirm: (palabraClave) => {
             palabraClave = palabraClave.toLowerCase().trim()
-            let resultado = lista.filter ((pokemon) => pokemon.tipo.toLowerCase().includes(palabraClave))
+            let resultado = lista.filter ((pokemon) => removeAccents(pokemon.tipo).toLowerCase().includes(palabraClave))
                 if (resultado.length > 0){
                     console.table(resultado)
-                    const resultadoJson = JSON.stringify(resultado)
-                    sessionStorage.setItem('resultado', resultadoJson)
+                    localStoragePkmHistorial(resultado)
+                    guardarSessionStoragePkm(resultado)
                     Swal.fire({
                         title: 'Resultados de búsqueda',
                         html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
@@ -337,19 +336,22 @@ function crearPokemon() {
     Swal.fire({
         title: "Agregar Pokemon",
         html:
-          `<label>Nombre:</label> <input id="nombre-input"    class="swal2-input" type="text" autofocus>
-
-           <label>Tipo:</label><input id="tipo-input"         class="swal2-input" type="text" autofocus>`,
+        `<div style="display: flex; flex-direction: column;">
+        <label>Nombre:</label> <input id="nombre-input" class="swal2-input" type="text" autofocus>
+        <label>Tipo:</label> <input id="tipo-input" class="swal2-input" type="text" autofocus>
+        <label>URL de la Imagen:</label> <input id="imagen-input" class="swal2-input" type="text" autofocus>
+      </div>`,
         showCancelButton: true,
         confirmButtonText: "Agregar",
         cancelButtonText: "Cancelar",
       }).then((result) => {
             if (result.isConfirmed) {
-                let nombre= document.getElementById("nombre-input").value.trim();
-                let tipo = document.getElementById("tipo-input").value.trim();
-                let numero = ultimoNumero +1 // asi el nuevo pokemon siempre sera el numero que sigue en la lista
+                let numero = ultimoNumero () // asi el nuevo pokemon siempre sera el numero que sigue en la lista
+                let nombre= document.getElementById("nombre-input").value.trim()
+                let tipo = document.getElementById("tipo-input").value.trim()
+                let imgPkm = document.getElementById("imagen-input").value
 
-            if ( (nombre === ("" || null)) || (tipo === ("" || null))){ /* validacion para evitar string vacio y cancel */
+            if (!nombre || !tipo){ /* validacion para evitar string vacio y cancel */
                 Swal.fire({
                     title: "Error",
                     text: "Por favor ingresa valores válidos.",
@@ -358,7 +360,7 @@ function crearPokemon() {
             })
                 return
             }
-            let pokemon = new Pokemon (numero, nombre, tipo)
+            let pokemon = new Pokemon (numero, nombre, tipo, imgPkm)
 
             if (lista.some((nuevopkm) => nuevopkm.nombre === pokemon.nombre)) {
                 Swal.fire({
@@ -369,10 +371,9 @@ function crearPokemon() {
                 return
               }
                 lista.push(pokemon)
-                localStorage.setItem("pokemones", JSON.stringify(lista));
-                console.table(lista[lista.length - 1])
-                const resultadoJson = JSON.stringify(resultado)
-                sessionStorage.setItem('resultado', resultadoJson)
+                localStoragePkmCreados(pokemon)
+                localStoragePkmHistorial(pokemon)
+                guardarSessionStoragePkm(pokemon)
 
                 Swal.fire({
                     icon: "success",
@@ -383,6 +384,17 @@ function crearPokemon() {
             }
         }
         )
+}
+
+//Ultimo numero
+function ultimoNumero () {
+    if(!localPkmCreados){
+        return lista[lista.length - 1].numero +1 /* si localStrg es falsy, asigna ultimo num del array */
+} else{
+    localPkmCreadosParseado.reduce((max, localPkmCreadosParseado) => { /* Reduce para encontrar num max dentro del LocalStrg */
+        return localPkmCreadosParseado.numero > max ? localPkmCreadosParseado.numero : max;
+        }, -Infinity)
+    }
 }
 
 //Funcion buscar aleatorio
@@ -398,21 +410,99 @@ function buscarAleatorio (){
         })
 }
 
+//Datos Creados Local Declarado globalmente
+let localPkmCreados = localStorage.getItem('creados')
+let localPkmCreadosParseado = localPkmCreados ? JSON.parse(localPkmCreados) : [];
+
+//Añadir creados al Local storage
+
+function localStoragePkmCreados(nuevoPokemon) {
+    localPkmCreadosParseado.push(nuevoPokemon)
+    
+    localStorage.setItem('creados', JSON.stringify(localPkmCreadosParseado));
+}
+
+//Añadir Historial al Local storage
+
+let localPkmHistParseado = JSON.parse( localStorage.getItem('historial')) || []
+
+function localStoragePkmHistorial(nuevoPokemon) {
+    localPkmHistParseado = localPkmHistParseado.concat(nuevoPokemon);
+    localStorage.setItem('historial', JSON.stringify(localPkmHistParseado))
+}
+
+//Añadir recientes al session storage
+
+let pokemonReciente = JSON.parse(sessionStorage.getItem('recientes')) || []
+
+function guardarSessionStoragePkm(nuevoPokemon) {
+    pokemonReciente = pokemonReciente.concat(nuevoPokemon);
+    sessionStorage.setItem('recientes', JSON.stringify(pokemonReciente));
+}
+
 //funcion Mostrar recientes
 function mostrarRecientes(){
-    let pokemonGuardado = JSON.parse(sessionStorage.getItem('resultado'))
+    let pokemonReciente = JSON.parse(sessionStorage.getItem('recientes'))
+
+    if (!pokemonReciente || pokemonReciente.length === 0) {
+        Swal.fire({
+          title: 'No hay búsquedas recientes',
+          icon: 'info',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
 Swal.fire({
-    title: 'Ultimas busquedas',
+    title: 'Busquedas Recientes',
     html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
-    pokemonGuardado.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+    pokemonReciente.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
     confirmButtonText: 'OK'
     })
 }
-//cont ultimo numero declarado globalmente
 
-let ultimoNumero = lista[lista.length - 1].numero
+//funcion Mostrar Historial
+function mostrarHistorial(){
+    let pokemonHistorial = JSON.parse(localStorage.getItem('historial'))
 
-//Remover acentos (no pude agregarlo al codigo, la sintaxis de la libreria sweet alert me resulto muy confusa)
+    if (!pokemonHistorial || pokemonHistorial.length === 0) {
+        Swal.fire({
+          title: 'Historial vacio',
+          icon: 'info',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+Swal.fire({
+    title: 'Todas tus busquedas',
+    html: '<table><tr><th>Numero</th><th>Nombre</th><th>Tipo</th></tr>' +
+    pokemonHistorial.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+    confirmButtonText: 'OK'
+    })
+}
+
+//Borrar Historial y recientes
+
+function borrarStorage() {
+    localStorage.removeItem('historial')
+    sessionStorage.clear()
+    Swal.fire({
+        title: 'Historial y recientes borrado correctamente :D',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+}
+
+//Borrar Pkm Creados
+
+function borrarPkmCreados() {
+    localStorage.removeItem('creados');
+    Swal.fire({
+        title: 'Pokemones creados borrados correctamente :(',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+  }
+//Remover acentos
 function removeAccents(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
@@ -424,6 +514,27 @@ function verTodos (tipoFiltro = null) {
     const pokemonCard = crearPokemonCard(pokemon);
     mainContainer.appendChild(pokemonCard);
 })
+}
+//ver pokemon creados
+
+function verPokemonCreados() {
+    let localPkmCreados = JSON.parse(localStorage.getItem('creados'));
+  
+    if (!localPkmCreados || localPkmCreados.length === 0) {
+      Swal.fire({
+        title: 'No hay Pokémon creados',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+  
+    Swal.fire({
+      title: 'Pokémon Creados',
+      html: '<table><tr><th>Numero</th><th>Nombre</th><th>Imagen</th><th>Tipo</th></tr>' +
+        localPkmCreados.map(pokemon => `<tr><td>${pokemon.numero}</td><td>${pokemon.nombre}</td><td><img src="${pokemon.imgPkm}" alt="${pokemon.nombre}" width="100"></td><td>${pokemon.tipo}</td></tr>`).join('') + '</table>',
+      confirmButtonText: 'OK'
+    });
 }
 
                 //Botones
@@ -447,15 +558,26 @@ let btnAdd = document.getElementById("btn-add")
 
 btnAdd.addEventListener("click", crearPokemon)
 
+//Recientes
+let btnHistorial = document.getElementById("btn-historial")
+
+btnHistorial.addEventListener("click", mostrarHistorial)
+
 //Buscar aleatorio
 let btnRandom = document.getElementById("btn-random")
 
 btnRandom.addEventListener("click", buscarAleatorio)
 
+// ver creados
+let btnverCreados = document.getElementById("btn-creados")
+
+btnverCreados.addEventListener("click", verPokemonCreados)
+
 //Recientes
 let btnRecientes = document.getElementById("btn-recientes")
 
 btnRecientes.addEventListener("click", mostrarRecientes)
+
     //ver todos
 let botonTodos = document.getElementById("ver-todos")
 
@@ -590,6 +712,16 @@ btnHada.addEventListener("click",() => {
     removerCards()
     verTodos("hada")})
 
+//Borrar Historial boton
+let borrarHistorial = document.getElementById("btn-borrar-historial")
+
+borrarHistorial.addEventListener("click", borrarStorage)
+
+//Borrar Historial boton
+let borrarPkm = document.getElementById("btn-borrar-pkm")
+
+borrarPkm.addEventListener("click", borrarPkmCreados)
+
 //Main contenedor de las cards declarado
 const mainContainer = document.querySelector('main');
 
@@ -630,7 +762,7 @@ const div = document.createElement("div");
     // tipo pkmn
     const p = document.createElement('p');
     p.textContent = pokemon.tipo;
-
+    p.classList.add('btn-header')
     // Agregar numero, nombre y tipo
     pokeCard.appendChild(h2);
     pokeCard.appendChild(h3);
