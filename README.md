@@ -1,4 +1,4 @@
-Pokédex con HTML, CSS y JavaScript 
+Pokédex con HTML, CSS y JavaScript. 
 Este proyecto es una Pokédex virtual creada utilizando HTML, CSS y JavaScript. 
 Permite a los usuarios explorar información sobre los Pokémon, y se han utilizado varias técnicas y recursos para lograrlo:
 
