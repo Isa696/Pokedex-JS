@@ -37,6 +37,7 @@ Se verifica que los datos obtenidos de la API sean válidos antes de mostrarlos 
 📚Librerías:
 Se ha utilizado la librería SweetAlert (Swal) para mostrar mensajes de alerta al usuario de manera más atractiva.
 
-Cómo probarlo:
+
 Puedes ver e interactuar con la versión final del proyecto en vivo aquí.
-https://isa696.github.io/Pokedex-JS/
+
+https://isa696.github.io/Pokedex-JS/👈
