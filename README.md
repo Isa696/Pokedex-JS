@@ -1,5 +1,5 @@
 Pokédex con HTML, CSS y JavaScript. 
-Este proyecto es una Pokédex virtual creada utilizando HTML, CSS y JavaScript. 
+
 Permite a los usuarios explorar información sobre los Pokémon, y se han utilizado varias técnicas y recursos para lograrlo:
 
 Tecnologías utilizadas:
@@ -11,6 +11,7 @@ JavaScript: Lógica para cargar datos de la PokéAPI y mostrarlos en la página.
 Características destacadas:
 
 Almacenamiento local:
+
 sessionStorage: Se utiliza para almacenar temporalmente datos en el navegador del usuario.
 En este proyecto se utiliza para ver busquedas recientes.
 
