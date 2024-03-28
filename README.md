@@ -40,4 +40,4 @@ Se ha utilizado la librería SweetAlert (Swal) para mostrar mensajes de alerta a
 
 Puedes ver e interactuar con la versión final del proyecto en vivo aquí.
 
-https://isa696.github.io/Pokedex-JS/👈
+https://isa696.github.io/Pokedex-JS/ 👈
